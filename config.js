@@ -29,8 +29,8 @@ global.APIKeys = { // APIKey Here
 }
 
 // Sticker WM
-global.packname = 'wa.me/6285713964963'
-global.author = 'Metro Bot'
+global.packname = 'Created By'
+global.author = 'Cloud Bot'
 
 global.multiplier = 69 // The higher, The harder levelup
 
