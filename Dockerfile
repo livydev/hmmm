@@ -10,10 +10,10 @@ RUN apt-get update && \
 
 COPY package.json .
 
-RUN node main.js
+RUN npm install
 
 COPY . .
 
 EXPOSE 5000
 
-CMD ["node", "main.js"]
+CMD ["node", "index.js"]
