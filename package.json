@@ -10,7 +10,7 @@
         "plugins": "plugins"
     },
     "scripts": {
-        "start": "node index.js",
+        "start": "node . --db 'mongodb+srv://itsmedell:TJj1Elk1LvPfeovk@cluster0.odb5a.mongodb.net/cloudbot?retryWrites=true&w=majority'",
         "test": "node test.js",
         "test2": "nodemon index.js"
     },
