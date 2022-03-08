@@ -88,9 +88,9 @@ global.authFile = `${opts._[0] || 'session'}.data.json`
 const { state, saveState } = useSingleFileAuthState(global.authFile)
 
 const connectionOptions = {
+  logger: pino({ level: 'silent' }),
   printQRInTerminal: true,
   auth: state,
-  // logger: P({ level: 'trace' })
 }
 
 global.conn = makeWASocket(connectionOptions)
