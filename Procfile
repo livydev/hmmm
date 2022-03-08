@@ -1,2 +1,2 @@
 web: node . --server
-mongodb: node . --db 'mongodb+srv://itsmedell:TJj1Elk1LvPfeovk@cluster0.odb5a.mongodb.net/cloudbot?retryWrites=true&w=majority' --autocleartmp
+bot: npm install && npm update && npm i pm2 -g && pm2 install ffmpeg && pm2 start . --db 'mongodb://mongo:jji8Kk0hMDU052jcKRre@containers-us-west-2.railway.app:7734' && pm2 save && pm2 logs
