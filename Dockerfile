@@ -5,7 +5,6 @@ RUN apt-get update && \
   ffmpeg \
   imagemagick \
   webp && \
-  npm install pm2 -g \
   apt-get upgrade -y && \
   rm -rf /var/lib/apt/lists/*
 
@@ -14,7 +13,7 @@ ENV PM2_SECRET_KEY 10li9bc1krfwk5z
 
 COPY package.json .
 
-RUN npm install && npm install qrcode-terminal
+RUN npm install && npm install qrcode-terminal && npm install pm2 -g
 
 COPY . .
 
