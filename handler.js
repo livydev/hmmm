@@ -2,15 +2,23 @@ import { smsg } from './lib/simple.js'
 import { format } from 'util'
 import { fileURLToPath } from 'url'
 import path, { join } from 'path'
-import { watch } from 'fs'
+import { unwatchFile, watchFile } from 'fs'
 import chalk from 'chalk'
 
+/**
+ * @type {import('@adiwajshing/baileys')}
+ */
+const { proto } = (await import('@adiwajshing/baileys')).default
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(function () {
     clearTimeout(this)
     resolve()
 }, ms))
 
+/**
+ * Handle messages upsert
+ * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['messages.upsert']} groupsUpdate 
+ */
 export async function handler(chatUpdate) {
     this.msgqueque = this.msgqueque || []
     if (!chatUpdate)
@@ -19,7 +27,6 @@ export async function handler(chatUpdate) {
     let m = chatUpdate.messages[chatUpdate.messages.length - 1]
     if (!m)
         return
-    if (m.messageStubType == 2) console.log(m)
     if (global.db.data == null)
         await global.loadDatabase()
     try {
@@ -342,16 +349,22 @@ export async function handler(chatUpdate) {
                 continue
             if (plugin.disabled)
                 continue
+            const __filename = join(___dirname, name)
             if (typeof plugin.all === 'function') {
                 try {
                     await plugin.all.call(this, m, {
                         chatUpdate,
                         __dirname: ___dirname,
-                        __filename: join(___dirname, name)
+                        __filename
                     })
                 } catch (e) {
                     // if (typeof e === 'string') continue
                     console.error(e)
+                    for (let [jid] of global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
+                        let data = (await conn.onWhatsApp(jid))[0] || {}
+                        if (data.exists)
+                            m.reply(`*Plugin:* ${name}\n*Sender:* ${m.sender}\n*Chat:* ${m.chat}\n*Command:* ${m.text}\n\n\`\`\`${format(e)}\`\`\``.trim(), data.jid)
+                    }
                 }
             }
             if (!opts['restrict'])
@@ -374,7 +387,7 @@ export async function handler(chatUpdate) {
                         [[new RegExp(str2Regex(_prefix)).exec(m.text), new RegExp(str2Regex(_prefix))]] :
                         [[[], new RegExp]]
             ).find(p => p[1])
-            if (typeof plugin.before === 'function')
+            if (typeof plugin.before === 'function') {
                 if (await plugin.before.call(this, m, {
                     match,
                     conn: this,
@@ -390,9 +403,10 @@ export async function handler(chatUpdate) {
                     isPrems,
                     chatUpdate,
                     __dirname: ___dirname,
-                    __filename: join(___dirname, name)
+                    __filename
                 }))
                     continue
+            }
             if (typeof plugin !== 'function')
                 continue
             if ((usedPrefix = (match[0] || '')[0])) {
@@ -498,7 +512,7 @@ export async function handler(chatUpdate) {
                     isPrems,
                     chatUpdate,
                     __dirname: ___dirname,
-                    __filename: join(___dirname, name)
+                    __filename
                 }
                 try {
                     await plugin.call(this, m, extra)
@@ -513,7 +527,7 @@ export async function handler(chatUpdate) {
                         for (let key of Object.values(global.APIKeys))
                             text = text.replace(new RegExp(key, 'g'), '#HIDDEN#')
                         if (e.name)
-                            for (let [jid] of global.owner.filter(([number, isCreator, isDeveloper]) => isDeveloper && number)) {
+                            for (let [jid] of global.owner.filter(([number, _, isDeveloper]) => isDeveloper && number)) {
                                 let data = (await conn.onWhatsApp(jid))[0] || {}
                                 if (data.exists)
                                     m.reply(`*Plugin:* ${m.plugin}\n*Sender:* ${m.sender}\n*Chat:* ${m.chat}\n*Command:* ${usedPrefix}${command} ${args.join(' ')}\n\n\`\`\`${text}\`\`\``.trim(), data.jid)
@@ -581,7 +595,7 @@ export async function handler(chatUpdate) {
         }
 
         try {
-            await (await import(`./lib/print.js?update=${Date.now()}`)).default(m, this)
+            if (!opts['noprint']) await (await import(`./lib/print.js`)).default(m, this)
         } catch (e) {
             console.log(m, m.quoted, e)
         }
@@ -589,11 +603,16 @@ export async function handler(chatUpdate) {
             await this.chatRead(m.chat, m.isGroup ? m.sender : undefined, m.id || m.key.id).catch(() => { })
     }
 }
+
+/**
+ * Handle groups participants update
+ * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['group-participants.update']} groupsUpdate 
+ */
 export async function participantsUpdate({ id, participants, action }) {
     if (opts['self'])
         return
     // if (id in conn.chats) return // First login will spam
-    if (global.isInit)
+    if (this.isInit)
         return
     if (global.db.data == null)
         await loadDatabase()
@@ -628,12 +647,34 @@ export async function participantsUpdate({ id, participants, action }) {
             break
     }
 }
+
+/**
+ * Handle groups update
+ * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['groups.update']} groupsUpdate 
+ */
+export async function groupsUpdate(groupsUpdate) {
+    if (opts['self'])
+        return
+    for (const groupUpdate of groupsUpdate) {
+        const id = groupUpdate.id
+        if (!id) continue
+        let chats = global.db.data.chats[id], text = ''
+        if (!chats?.detect) continue
+        if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '```Description has been changed to```\n@desc').replace('@desc', groupUpdate.desc)
+        if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '```Subject has been changed to```\n@subject').replace('@subject', groupUpdate.subject)
+        if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '```Icon has been changed to```').replace('@icon', groupUpdate.icon)
+        if (groupUpdate.revoke) text = (chats.sRevoke || this.sRevoke || conn.sRevoke || '```Group link has been changed to```\n@revoke').replace('@revoke', groupUpdate.revoke)
+        if (!text) continue
+        await this.sendMessage(id, { text, mentions: this.parseMention(text) })
+    }
+}
+
 export async function deleteUpdate(message) {
     try {
         const { fromMe, id, participant } = message
         if (fromMe)
             return
-        let msg = this.serializeM(await this.loadMessage(id))
+        let msg = this.serializeM(this.loadMessage(id))
         if (!msg)
             return
         let chat = global.db.data.chats[msg.chat] || {}
@@ -668,10 +709,9 @@ global.dfail = (type, m, conn) => {
     if (msg) return m.reply(msg)
 }
 
-
 let file = global.__filename(import.meta.url, true)
-const watcher = watch(file, async () => {
-    watcher.close()
+watchFile(file, async () => {
+    unwatchFile(file)
     console.log(chalk.redBright("Update 'handler.js'"))
     if (global.reloadHandler) console.log(await global.reloadHandler())
 })

@@ -1,6 +1,6 @@
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 import './config.js';
-import { pino } from 'pino'
+
 import { createRequire } from "module"; // Bring in the ability to create the 'require' method
 import path, { join } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
@@ -21,9 +21,10 @@ import { spawn } from 'child_process';
 import lodash from 'lodash';
 import syntaxerror from 'syntax-error';
 import { tmpdir } from 'os';
-import { format } from 'util'
+import { format } from 'util';
 import { makeWASocket, protoType, serialize } from './lib/simple.js';
-import { Low, JSONFile } from 'lowdb'
+import { Low, JSONFile } from 'lowdb';
+import pino from 'pino';
 import {
   mongoDB,
   mongoDBV2
@@ -64,7 +65,7 @@ global.loadDatabase = async function loadDatabase() {
   if (global.db.READ) return new Promise((resolve) => setInterval(async function () {
     if (!global.db.READ) {
       clearInterval(this)
-      resolve(global.db.data == null ? await global.loadDatabase() : global.db.data)
+      resolve(global.db.data == null ? global.loadDatabase() : global.db.data)
     }
   }, 1 * 1000))
   if (global.db.data !== null) return
@@ -88,9 +89,9 @@ global.authFile = `${opts._[0] || 'session'}.data.json`
 const { state, saveState } = useSingleFileAuthState(global.authFile)
 
 const connectionOptions = {
-  logger: pino({ level: 'silent' }),
   printQRInTerminal: true,
   auth: state,
+  // logger: pino({ level: 'trace' })
 }
 
 global.conn = makeWASocket(connectionOptions)
@@ -138,7 +139,7 @@ let isInit = true;
 let handler = await import('./handler.js')
 global.reloadHandler = async function (restatConn) {
   try {
-    const Handler = await import(`./handler.js?update=${Date.now()}`)
+    const Handler = await import(`./handler.js?update=${Date.now()}`).catch(console.error)
     if (Object.keys(Handler || {}).length) handler = Handler
   } catch (e) {
     console.error(e)
@@ -153,6 +154,7 @@ global.reloadHandler = async function (restatConn) {
   if (!isInit) {
     conn.ev.off('messages.upsert', conn.handler)
     conn.ev.off('group-participants.update', conn.participantsUpdate)
+    conn.ev.off('groups.update', conn.groupsUpdate)
     conn.ev.off('message.delete', conn.onDelete)
     conn.ev.off('connection.update', conn.connectionUpdate)
     conn.ev.off('creds.update', conn.credsUpdate)
@@ -162,14 +164,20 @@ global.reloadHandler = async function (restatConn) {
   conn.bye = 'Selamat tinggal @user!'
   conn.spromote = '@user sekarang admin!'
   conn.sdemote = '@user sekarang bukan admin!'
+  conn.sDesc = 'Deskripsi telah diubah ke \n@desc'
+  conn.sSubject = 'Judul grup telah diubah ke \n@subject'
+  conn.sIcon = 'Icon grup telah diubah!'
+  conn.sRevoke = 'Link group telah diubah ke \n@revoke'
   conn.handler = handler.handler.bind(global.conn)
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn)
+  conn.groupsUpdate = handler.groupsUpdate.bind(global.conn)
   conn.onDelete = handler.deleteUpdate.bind(global.conn)
   conn.connectionUpdate = connectionUpdate.bind(global.conn)
   conn.credsUpdate = saveState.bind(global.conn)
 
   conn.ev.on('messages.upsert', conn.handler)
   conn.ev.on('group-participants.update', conn.participantsUpdate)
+  conn.ev.on('groups.update', conn.groupsUpdate)
   conn.ev.on('message.delete', conn.onDelete)
   conn.ev.on('connection.update', conn.connectionUpdate)
   conn.ev.on('creds.update', conn.credsUpdate)
