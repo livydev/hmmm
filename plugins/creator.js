@@ -1,4 +1,4 @@
-const PhoneNumber = require('awesome-phonenumber')
+import PhoneNumber from 'awesome-phonenumber'
 async function handler(m) {
                 let vcard = 'BEGIN:VCARD\n' // metadata of the contact card
                     + 'VERSION:3.0\n' 
