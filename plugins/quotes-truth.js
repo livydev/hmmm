@@ -1,6 +1,9 @@
-
 import { truth } from '@bochilteam/scraper'
-let handler = async (m) => m.reply(await truth())
+
+let handler = async (m, { conn, usedPrefix }) => conn.sendButton(m.chat, await truth(), author, [
+    ['Truth', `${usedPrefix}truth`],
+    ['Dare', `${usedPrefix}dare`]
+], m)
 
 handler.help = ['truth']
 handler.tags = ['quotes', 'fun']
