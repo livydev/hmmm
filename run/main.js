@@ -106,7 +106,7 @@ if (!opts['test']) {
     } catch (e) { console.error(e) }
   }, 60 * 1000)
 }
-if (opts['server']) (await import('./server.js')).default(global.conn, PORT)
+if (opts['server']) (await import('./run/server.js')).default(global.conn, PORT)
 
 
 function clearTmp() {
@@ -136,10 +136,10 @@ process.on('uncaughtException', console.error)
 // let strQuot = /(["'])(?:(?=(\\?))\2.)*?\1/
 
 let isInit = true;
-let handler = await import('./handler.js')
+let handler = await import('./run/handler.js')
 global.reloadHandler = async function (restatConn) {
   try {
-    const Handler = await import(`./handler.js?update=${Date.now()}`).catch(console.error)
+    const Handler = await import(`./run/handler.js?update=${Date.now()}`).catch(console.error)
     if (Object.keys(Handler || {}).length) handler = Handler
   } catch (e) {
     console.error(e)
