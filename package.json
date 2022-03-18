@@ -10,9 +10,9 @@
         "plugins": "plugins"
     },
     "scripts": {
-        "start": "node run/index.js",
-        "test": "node run/test.js",
-        "test2": "nodemon run/index.js"
+        "start": "node index.js",
+        "test": "node test.js",
+        "test2": "nodemon index.js"
     },
     "keywords": [
         "termux-whatsapp-bot",
