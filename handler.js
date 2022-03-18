@@ -1,4 +1,4 @@
-import { smsg } from '../../lib/simple.js'
+import { smsg } from './lib/simple.js'
 import { format } from 'util'
 import { fileURLToPath } from 'url'
 import path, { join } from 'path'
@@ -342,7 +342,7 @@ export async function handler(chatUpdate) {
         const isAdmin = isRAdmin || user?.admin == 'admin' || false // Is User Admin?
         const isBotAdmin = bot?.admin || false // Are you Admin?
 
-        const ___dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), '../plugins')
+        const ___dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), './plugins')
         for (let name in global.plugins) {
             let plugin = global.plugins[name]
             if (!plugin)
@@ -595,7 +595,7 @@ export async function handler(chatUpdate) {
         }
 
         try {
-            if (!opts['noprint']) await (await import(`../lib/print.js`)).default(m, this)
+            if (!opts['noprint']) await (await import(`./lib/print.js`)).default(m, this)
         } catch (e) {
             console.log(m, m.quoted, e)
         }
