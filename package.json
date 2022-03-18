@@ -2,7 +2,7 @@
     "name": "games-wabot",
     "version": "0.9.86",
     "description": "Customizable WhatsApp Bot",
-    "main": "run/index.js",
+    "main": "index.js",
     "type": "module",
     "directories": {
         "lib": "lib",
