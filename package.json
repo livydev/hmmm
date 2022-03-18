@@ -2,7 +2,7 @@
     "name": "games-wabot",
     "version": "0.9.86",
     "description": "Customizable WhatsApp Bot",
-    "main": "index.js",
+    "main": "run/index.js",
     "type": "module",
     "directories": {
         "lib": "lib",
@@ -10,9 +10,9 @@
         "plugins": "plugins"
     },
     "scripts": {
-        "start": "node index.js",
-        "test": "node test.js",
-        "test2": "nodemon index.js"
+        "start": "node run/index.js",
+        "test": "node run/test.js",
+        "test2": "nodemon run/index.js"
     },
     "keywords": [
         "termux-whatsapp-bot",
