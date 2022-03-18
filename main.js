@@ -22,13 +22,13 @@ import lodash from 'lodash';
 import syntaxerror from 'syntax-error';
 import { tmpdir } from 'os';
 import { format } from 'util';
-import { makeWASocket, protoType, serialize } from '../lib/simple.js';
+import { makeWASocket, protoType, serialize } from './lib/simple.js';
 import { Low, JSONFile } from 'lowdb';
 import pino from 'pino';
 import {
   mongoDB,
   mongoDBV2
-} from '../lib/mongoDB.js';
+} from './lib/mongoDB.js';
 const {
   useSingleFileAuthState,
   DisconnectReason
