@@ -1,7 +1,7 @@
 const items = {
     buy: {
         limit: {
-            money: 999
+            exp: 999
         },
         potion: {
             money: 1250,
