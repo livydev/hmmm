@@ -2,32 +2,27 @@ import { promises } from 'fs'
 import { join } from 'path'
 import { xpRange } from '../lib/levelling.js'
 let tags = {
-  'main': 'Main',
-  'game': 'Game',
-  'rpg': 'RPG Games',
-  'xp': 'Exp & Limit',
-  'sticker': 'Sticker',
-  'kerang': 'Kerang Ajaib',
-  'quotes': 'Quotes',
-  'admin': 'Admin',
-  'group': 'Group',
-  'premium': 'Premium',
-  'internet': 'Internet',
-  'anonymous': 'Anonymous Chat',
-  'nulis': 'MagerNulis & Logo',
-  'downloader': 'Downloader',
-  'tools': 'Tools',
-  'fun': 'Fun',
-  'database': 'Database',
-  'vote': 'Voting',
-  'absen': 'Absen',
-  'quran': 'Al Qur\'an',
-  'jadibot': 'Jadi Bot',
-  'owner': 'Owner',
-  'host': 'Host',
-  'advanced': 'Advanced',
-  'info': 'Info',
-  '': 'No Category',
+  'main': '𝐌𝐚𝐢𝐧',
+  'game': '𝐆𝐚𝐦𝐞',
+  'rpg': '𝐑𝐏𝐆 𝐆𝐚𝐦𝐞𝐬',
+  'xp': '𝐄𝐗𝐏 & 𝐋𝐢𝐦𝐢𝐭',
+  'sticker': '𝐒𝐭𝐢𝐜𝐤𝐞𝐫',
+  'kerang': '𝐊𝐞𝐫𝐚𝐧𝐠 𝐀𝐣𝐚𝐢𝐛',
+  'quotes': '𝐐𝐮𝐨𝐭𝐞𝐬',
+  'admin': '𝐀𝐝𝐦𝐢𝐧',
+  'group': '𝐆𝐫𝐨𝐮𝐩',
+  'internet': '𝐈𝐧𝐭𝐞𝐫𝐧𝐞𝐭',
+  'anonymous': '𝐀𝐧𝐨𝐧𝐲𝐦𝐨𝐮𝐬 𝐂𝐡𝐚𝐭',
+  'nulis': '𝐌𝐚𝐠𝐞𝐫𝐍𝐮𝐥𝐢𝐬',
+  'downloader': '𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫',
+  'tools': '𝐓𝐨𝐨𝐥𝐬',
+  'fun': '𝐅𝐮𝐧',
+  'database': '𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞',
+  'quran': '𝐀𝐥 𝐐𝐮𝐫'𝐚𝐧',
+  'owner': '𝐎𝐰𝐧𝐞𝐫',
+  'maker': '𝐌𝐚𝐤𝐞𝐫',
+  'advanced': '𝐀𝐝𝐯𝐚𝐧𝐜𝐞𝐝',
+  'info': '𝐈𝐧𝐟𝐨'
 }
 const defaultMenu = {
   before: `╭━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙
@@ -48,9 +43,9 @@ const defaultMenu = {
 ╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙
 
 %readmore`.trimStart(),
-  header: '╭━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙\n│ *「 %category 」*\n╰┬────────────┈ ⳹\n┌┤*#JanganDispam*',
+  header: '╭━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙\n│ *「 %category 」*\n╰┬────────────┈ ⳹\n┌┤ *#JanganDispam*',
   body: '││◦➛ %cmd %islimit %isPremium',
-  footer: '│╰────────────┈ ⳹\n│ *𝐓𝐚𝐧𝐠𝐠𝐚𝐥:* *%week, %date* \n├────────────────\n│ *𝐂𝐋𝐎𝐔𝐃𝐁𝐎𝐓 𝐌𝐔𝐋𝐓𝐈-𝐃𝐄𝐕𝐈𝐂𝐄*\n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙',
+  footer: '│╰────────────┈ ⳹\n│ *𝐓𝐚𝐧𝐠𝐠𝐚𝐥:* *%week, %date* \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙',
   after: ``,
 }
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
