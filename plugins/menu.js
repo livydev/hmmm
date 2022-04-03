@@ -30,20 +30,7 @@ let tags = {
   '': 'No Category',
 }
 const defaultMenu = {
-  before: `
-╭─「 %me 🤖」
-│ 👋🏻 Hai, 
-│
-│ 🧱 Limit : *%limit Limit*
-│ 🦸🏼‍♂️ Role : *%role*
-│ 🔼 Level : *%level (%exp / %maxexp)*
-│ 💫 Total XP : %totalexp ✨ 
-│ 📅 Tanggal: *%week, %date*
-│ 🕰️ Waktu: *%time*
-│ 📈 Uptime: *%uptime (%muptime)*
-│ 📊 Database: %rtotalreg of %totalreg
-╰────
-╭━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙
+  before: `╭━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙
 │ *「 %me 」*
 │ *𝐓𝐞𝐫𝐢𝐦𝐚𝐤𝐚𝐬𝐢𝐡 𝐒𝐮𝐝𝐚𝐡*
 │ *𝐌𝐞𝐧𝐠𝐠𝐮𝐧𝐚𝐤𝐚𝐧 𝐁𝐨𝐭 𝐢𝐧𝐢*
