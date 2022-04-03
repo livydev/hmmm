@@ -38,8 +38,8 @@ export default handler
 function reward(user = {}) {
     let rewards = {
         reward: {
-            Money: 201,
-            exp: 301,
+            money: 2001,
+            exp: 509,
             trash: 101,
             potion: 2,
             rock: 2,
