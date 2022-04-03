@@ -15,19 +15,19 @@ let handler = async (m, { usedPrefix }) => {
     for (const lost in rewards.lost) if (user[lost]) {
         const total = rewards.lost[lost].getRandom()
         user[lost] -= total * 1
-        if (total) text += `\n│ *${global.rpg.emoticon(lost)}:* ${total}\n╰┬────────────┈ ⳹`
+        if (total) text += `\n│ ${global.rpg.emoticon(lost)}: ${total}\n╰┬────────────┈ ⳹`
     }
     text += '\n┌┤◦➛ 𝐊𝐚𝐦𝐮 𝐦𝐞𝐧𝐝𝐚𝐩𝐚𝐭𝐤𝐚𝐧'
     for (const rewardItem in rewards.reward) if (rewardItem in user) {
         const total = rewards.reward[rewardItem].getRandom()
         user[rewardItem] += total * 1
-        if (total) text += `\n││◦➛ *${global.rpg.emoticon(rewardItem)}:* ${total}`                  
+        if (total) text += `\n││◦➛ ${global.rpg.emoticon(rewardItem)}: ${total}`                  
     }
     text += `\n│╰────────────┈ ⳹\n│ 𝐂𝐥𝐨𝐮𝐝𝐁𝐨𝐭-𝐌𝐃 \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙`
     const poid = 'https://i.ibb.co/3r9520N/logo.png'
     conn.sendHydrated(m.chat, '🄰🄳🅅🄴🄽🅃🅄🅁🄴', text.trim(), poid, 'https://github.com/itsmedell', 'Github', null, null, [
       ['𝐃𝐨𝐧𝐚𝐭𝐞', '/donasi'],
-      ['𝐒𝐩𝐞𝐞𝐝', '/inv'],
+      ['𝐈𝐧𝐯𝐞𝐧𝐭𝐨𝐫𝐲', '/inv'],
       ['𝐂𝐫𝐞𝐚𝐭𝐨𝐫', '/owner']
     ], m)
     user.lastadventure = new Date * 1
