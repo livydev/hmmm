@@ -77,7 +77,7 @@ ${rpg.emoticon(v)}${v}
     let count = Math.floor(isNumber(args[1]) ? Math.min(Math.max(parseInt(args[1]), 1), Number.MAX_SAFE_INTEGER) : 1) * 1
     if (!(type in listCrate)) return m.reply(info)
     if (user[type] < count) return m.reply(`
-Your *${rpg.emoticon(type)}${type} crate* is not enough!, you only have ${user[type]} *${rpg.emoticon(type)}${type} crate*
+Your *${rpg.emoticon(type)} crate* is not enough!, you only have ${user[type]} *${rpg.emoticon(type)} crate*
 type *${usedPrefix}buy ${type} ${count - user[type]}* to buy
 `.trim())
     // TODO: add pet crate
@@ -94,9 +94,9 @@ type *${usedPrefix}buy ${type} ${count - user[type]}* to buy
             }
     user[type] -= count * 1
     m.reply(`
-You have opened *${count}* ${global.rpg.emoticon(type)}${type} crate and got:
+You have opened *${count}* ${global.rpg.emoticon(type)} crate and got:
 ${Object.keys(crateReward).filter(v => v && crateReward[v] && !/legendary|pet|mythic|diamond|emerald/i.test(v)).map(reward => `
-*${global.rpg.emoticon(reward)}${reward}:* ${crateReward[reward]}
+*${global.rpg.emoticon(reward)}:* ${crateReward[reward]}
 `.trim()).join('\n')}
 `.trim())
     let diamond = crateReward.diamond, mythic = crateReward.mythic, pet = crateReward.pet, legendary = crateReward.legendary, emerald = crateReward.emerald
