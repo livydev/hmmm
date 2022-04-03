@@ -15,13 +15,13 @@ let handler = async (m, { usedPrefix }) => {
     for (const lost in rewards.lost) if (user[lost]) {
         const total = rewards.lost[lost].getRandom()
         user[lost] -= total * 1
-        if (total) text += `\n│ *${global.rpg.emoticon(lost)}${lost}:* ${total}\n╰┬────────────┈ ⳹`
+        if (total) text += `\n│ *${global.rpg.emoticon(lost)}:* ${total}\n╰┬────────────┈ ⳹`
     }
     text += '\n┌┤◦➛ 𝐊𝐚𝐦𝐮 𝐦𝐞𝐧𝐝𝐚𝐩𝐚𝐭𝐤𝐚𝐧'
     for (const rewardItem in rewards.reward) if (rewardItem in user) {
         const total = rewards.reward[rewardItem].getRandom()
         user[rewardItem] += total * 1
-        if (total) text += `\n││◦➛ *${global.rpg.emoticon(rewardItem)}${rewardItem}:* ${total}`                  
+        if (total) text += `\n││◦➛ *${global.rpg.emoticon(rewardItem)}:* ${total}`                  
     }
     text += `\n│╰────────────┈ ⳹\n│ 𝐂𝐥𝐨𝐮𝐝𝐁𝐨𝐭-𝐌𝐃 \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙`
     m.reply(text.trim())
