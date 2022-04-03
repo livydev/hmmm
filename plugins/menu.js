@@ -22,6 +22,8 @@ let tags = {
   'owner': '𝐎𝐰𝐧𝐞𝐫',
   'maker': '𝐌𝐚𝐤𝐞𝐫',
   'advanced': '𝐀𝐝𝐯𝐚𝐧𝐜𝐞𝐝',
+  'audio': '𝐀𝐮𝐝𝐢𝐨', 
+  'premium': '𝐏𝐫𝐞𝐦𝐢𝐮𝐦', 
   'info': '𝐈𝐧𝐟𝐨'
 }
 const defaultMenu = {
