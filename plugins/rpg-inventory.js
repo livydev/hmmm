@@ -103,11 +103,15 @@ let handler = async (m, { conn }) => {
   const caption = `
 Inventory *${conn.getName(m.sender)}*
 
-${Object.keys(inventory.others).map(v => user[v] && `*${global.rpg.emoticon(v)}${v}:* ${user[v]}`).filter(v => v).join('\n')}${tools ? `
+${Object.keys(inventory.others).map(v => user[v] && `*${global.rpg.emoticon(v)}:* ${user[v]}`).filter(v => v).join('\n')}${tools ? `
+
+
 
 
 *📍 Tools*
 ${tools}` : ''}${items ? `
+
+
 
 
 *📍 Items*
@@ -115,13 +119,20 @@ ${items}
 *🎒 Total Items:* ${Object.keys(inventory.items).map(v => user[v]).reduce((a, b) => a + b, 0)} Items` : ''}${crates ? `
 
 
+
+
 *📍 Crates*
 ${crates}
 *🎒 Total Crates:* ${Object.keys(inventory.crates).map(v => user[v]).reduce((a, b) => a + b, 0)} Crates` : ''}${pets ? `
 
 
+
+
 *📍 Pets*
 ${pets}` : ''}${cooldowns ? `
+
+
+
 
 *⌚ Cooldowns*
 ${cooldowns}` : ''}
