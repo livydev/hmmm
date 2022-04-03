@@ -24,7 +24,12 @@ let handler = async (m, { usedPrefix }) => {
         if (total) text += `\n││◦➛ *${global.rpg.emoticon(rewardItem)}:* ${total}`                  
     }
     text += `\n│╰────────────┈ ⳹\n│ 𝐂𝐥𝐨𝐮𝐝𝐁𝐨𝐭-𝐌𝐃 \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙`
-    m.reply(text.trim())
+    const poid = 'https://i.ibb.co/3r9520N/logo.png'
+    conn.sendHydrated(m.chat, '🄰🄳🅅🄴🄽🅃🅄🅁🄴', text.trim(), poid, 'https://github.com/itsmedell', 'Github', null, null, [
+      ['𝐃𝐨𝐧𝐚𝐭𝐞', '/donasi'],
+      ['𝐒𝐩𝐞𝐞𝐝', '/inv'],
+      ['𝐂𝐫𝐞𝐚𝐭𝐨𝐫', '/owner']
+    ], m)
     user.lastadventure = new Date * 1
 }
 handler.help = ['adventure', 'petualang', 'berpetualang', 'mulung']
