@@ -33,7 +33,7 @@ example *${usedPrefix}${command} money 1*
 
 📍 Type list
 ${leaderboard.map(v => `
-${rpg.emoticon(v)}${v}
+${rpg.emoticon(v)}
 `.trim()).join('\n')}
 `.trim()
   if (!leaderboard.includes(type)) return m.reply(wrong)
@@ -42,13 +42,13 @@ ${rpg.emoticon(v)}${v}
   let userItem = sortedItem.map(enumGetKey)
   // let len = args[0] && args[0].length > 0 ? Math.min(100, Math.max(parseInt(args[0]), 5)) : Math.min(5, sortedExp.length)
   let text = `
-• *${rpg.emoticon(type)}${type} Leaderboard page ${page} of ${getPage(type)}* •
+• *${rpg.emoticon(type)} Leaderboard page ${page} of ${getPage(type)}* •
 You: *${userItem.indexOf(m.sender) + 1}* of *${userItem.length}*
 
-${sortedItem.slice(page * 25, page * 25 + 25).map((user, i) => `${i + 1}. ${participants.some(p => areJidsSameUser(user.jid, p.id)) ? `(${conn.getName(user.jid)}) wa.me/` : '@'}${user.jid.split`@`[0]} *${user[type]} ${rpg.emoticon(type)}${type}*`).join`\n`}
+${sortedItem.slice(page * 100, page * 100 + 100).map((user, i) => `${i + 1}. ${participants.some(p => areJidsSameUser(user.jid, p.id)) ? `(${conn.getName(user.jid)}) wa.me/` : '@'}${user.jid.split`@`[0]} *${user[type]} ${rpg.emoticon(type)}*`).join`\n`}
 `.trim()
   return m.reply(text, null, {
-    mentions: [...userItem.slice(page * 25, page * 25 + 25)].filter(v => !participants.some(p => areJidsSameUser(v, p.id)))
+    mentions: [...userItem.slice(page * 100, page * 100 + 100)].filter(v => !participants.some(p => areJidsSameUser(v, p.id)))
   })
 }
 handler.help = ['leaderboard [jumlah user]', 'lb [jumlah user]']
