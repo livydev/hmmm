@@ -22,7 +22,7 @@ let handler = async (m, { usedPrefix }) => {
         const total = rewards.reward[rewardItem].getRandom()
         user[rewardItem] += total * 1
         if (total) text += `\n││◦➛ *${global.rpg.emoticon(rewardItem)}${rewardItem}:* ${total}`
-                   text += `\n│╰────────────┈ ⳹\n│ 𝐂𝐥𝐨𝐮𝐝𝐁𝐨𝐭-𝐌𝐃 \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙
+                   text += `\n│╰────────────┈ ⳹\n│ 𝐂𝐥𝐨𝐮𝐝𝐁𝐨𝐭-𝐌𝐃 \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙`
     }
     m.reply(text.trim())
     user.lastadventure = new Date * 1
