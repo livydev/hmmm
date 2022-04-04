@@ -30,7 +30,7 @@ Usage example: *${usedPrefix}${command} potion 10*
 📍Items list: 
 ${Object.keys(listItems).map((v) => {
         let paymentMethod = Object.keys(listItems[v]).find(v => v in user)
-        return `${global.rpg.emoticon(v)}${v} | ${listItems[v][paymentMethod]} ${global.rpg.emoticon(paymentMethod)}${paymentMethod}`.trim()
+        return `${global.rpg.emoticon(v)} | ${listItems[v][paymentMethod]} ${global.rpg.emoticon(paymentMethod)}${paymentMethod}`.trim()
     }).join('\n')}
 `.trim()
     const item = (args[0] || '').toLowerCase()
