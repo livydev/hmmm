@@ -30,7 +30,7 @@ Usage example: *${usedPrefix}${command} potion 10*
 📍Items list: 
 ${Object.keys(listItems).map((v) => {
         let paymentMethod = Object.keys(listItems[v]).find(v => v in user)
-        return `${global.rpg.emoticon(v)} | ${listItems[v][paymentMethod]} ${global.rpg.emoticon(paymentMethod)}${paymentMethod}`.trim()
+        return `${global.rpg.emoticon(v)} | ${listItems[v][paymentMethod]} ${global.rpg.emoticon(paymentMethod)}`.trim()
     }).join('\n')}
 `.trim()
     const item = (args[0] || '').toLowerCase()
@@ -38,7 +38,7 @@ ${Object.keys(listItems).map((v) => {
     if (!listItems[item]) return m.reply(info)
     if (command.toLowerCase() == 'buy') {
         let paymentMethod = Object.keys(listItems[item]).find(v => v in user)
-        if (user[paymentMethod] < listItems[item][paymentMethod] * total) return m.reply(`You don't have enough ${global.rpg.emoticon(paymentMethod)}${paymentMethod} to buy *${total}* ${global.rpg.emoticon(item)}. You need *${(listItems[item][paymentMethod] * total) - user[paymentMethod]}* more ${paymentMethod} to be able to buy`)
+        if (user[paymentMethod] < listItems[item][paymentMethod] * total) return m.reply(`You don't have enough ${global.rpg.emoticon(paymentMethod)} to buy *${total}* ${global.rpg.emoticon(item)}. You need *${(listItems[item][paymentMethod] * total) - user[paymentMethod]}* more ${paymentMethod} to be able to buy`)
         user[paymentMethod] -= listItems[item][paymentMethod] * total
         user[item] += total
         return m.reply(`You bought *${total}* ${global.rpg.emoticon(item)}`)
