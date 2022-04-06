@@ -41,7 +41,7 @@ global.rpg = {
     let emot = {
       level: '𝐋𝐞𝐯𝐞𝐥',
       limit: '𝐋𝐢𝐦𝐢𝐭',
-      health: '𝐇𝐞𝐚𝐥𝐭',
+      health: '𝐇𝐞𝐚𝐥𝐭𝐡',
       exp: '𝐄𝐗𝐏',
       money: '𝐌𝐨𝐧𝐞𝐲',
       potion: '𝐏𝐨𝐭𝐢𝐨𝐧',
