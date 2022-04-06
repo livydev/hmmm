@@ -45,10 +45,10 @@ ${rpg.emoticon(v)}
 • *${rpg.emoticon(type)} Leaderboard page ${page} of ${getPage(type)}* •
 You: *${userItem.indexOf(m.sender) + 1}* of *${userItem.length}*
 
-${sortedItem.slice(page * 100, page * 100 + 100).map((user, i) => `${i + 1}. ${participants.some(p => areJidsSameUser(user.jid, p.id)) ? `(${conn.getName(user.jid)}) wa.me/` : '@'}${user.jid.split`@`[0]} *${user[type]} ${rpg.emoticon(type)}*`).join`\n`}
+${sortedItem.slice(page * 10, page * 10 + 10).map((user, i) => `${i + 1}. ${participants.some(p => areJidsSameUser(user.jid, p.id)) ? `(${conn.getName(user.jid)}) wa.me/` : '@'}${user.jid.split`@`[0]} *${user[type]} ${rpg.emoticon(type)}*`).join`\n`}
 `.trim()
   return m.reply(text, null, {
-    mentions: [...userItem.slice(page * 100, page * 100 + 100)].filter(v => !participants.some(p => areJidsSameUser(v, p.id)))
+    mentions: [...userItem.slice(page * 10, page * 10 + 10)].filter(v => !participants.some(p => areJidsSameUser(v, p.id)))
   })
 }
 handler.help = ['leaderboard [jumlah user]', 'lb [jumlah user]']
