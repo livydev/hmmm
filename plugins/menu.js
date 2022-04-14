@@ -147,7 +147,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     const pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => './src/avatar_contact.png')
-    const cloudbot = 'https://i.ibb.co/3Svn4mK/ezgif-com-gif-maker.gif'
+    const cloudbot = 'https://i.ibb.co/64mn29X/images-3.jpg'
     conn.sendHydrated(m.chat, text.trim(), author, cloudbot, 'https://github.com/itsmedell', '𝐆𝐢𝐭𝐡𝐮𝐛', null, null, [
       ['𝐃𝐨𝐧𝐚𝐭𝐞', '/donasi'],
       ['𝐒𝐩𝐞𝐞𝐝', '/ping'],
