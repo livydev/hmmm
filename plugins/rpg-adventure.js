@@ -24,7 +24,7 @@ let handler = async (m, { usedPrefix }) => {
         if (total) text += `\n││◦➛ ${global.rpg.emoticon(rewardItem)}: ${total}`                  
     }
     text += `\n│╰────────────┈ ⳹\n│ 𝐂𝐥𝐨𝐮𝐝𝐁𝐨𝐭-𝐌𝐃 \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙`
-    const poid = 'https://i.ibb.co/3r9520N/logo.png'
+    const poid = 'https://i.ibb.co/64mn29X/images-3.jpg'
     conn.sendHydrated(m.chat, '🄰🄳🅅🄴🄽🅃🅄🅁🄴', text.trim(), poid, 'https://github.com/itsmedell', '𝐆𝐢𝐭𝐡𝐮𝐛', null, null, [
       ['𝐃𝐨𝐧𝐚𝐭𝐞', '/donasi'],
       ['𝐈𝐧𝐯𝐞𝐧𝐭𝐨𝐫𝐲', '/inv'],
