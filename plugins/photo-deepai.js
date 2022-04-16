@@ -21,6 +21,6 @@ let handler = async(m, { conn, usedPrefix, command }) => {
     }
 }
 handler.help = ['colorizer', 'deepdream', 'toonify', 'torch-srgan / hd', 'waifu2x']
-handler.tags = ['Deep.ai']
+handler.tags = ['𝐃𝐞𝐞𝐩.𝐀𝐈']
 handler.command = /^colorizer|deepdream|toonify|hd|torch-srgan|waifu2x$/i
 export default handler
