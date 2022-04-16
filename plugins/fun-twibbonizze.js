@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import { join } from 'path'
 
 let __dirname = global.__dirname(import.meta.url)
-let src = join(__dirname, '../tmp/')
+let src = join(__dirname, '../src/temp/')
 let tesss = join(src, pickRandom()+'.jpg')
 
 let handler = async (m, { conn, text }) => {
