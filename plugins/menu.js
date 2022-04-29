@@ -43,7 +43,6 @@ const defaultMenu = {
 │ 𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞: %rtotalreg of %totalreg
 ├────────────────
 │ 𝐔𝐩𝐭𝐢𝐦𝐞: %uptime (%muptime)
-│ 𝐓𝐨𝐭𝐚𝐥𝐅𝐢𝐭𝐮𝐫: ${totalfitur}
 ╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙
 
 `.trimStart(),
@@ -60,9 +59,6 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     let name = await conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
     let locale = 'id'
-    global.totalfitur = Object.values(global.plugins).filter(
-    (v) => v.help && v.tags
-    ).length
     // d.getTimeZoneOffset()
     // Offset -420 is 18.00
     // Offset    0 is  0.00
