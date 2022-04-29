@@ -60,7 +60,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     let name = await conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
     let locale = 'id'
-    let totalfitur = Object.values(global.plugins).filter(
+    global.totalfitur = Object.values(global.plugins).filter(
     (v) => v.help && v.tags
     ).length
     // d.getTimeZoneOffset()
