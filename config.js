@@ -2,6 +2,10 @@ import { watchFile, unwatchFile } from 'fs'
 import chalk from 'chalk'
 import { fileURLToPath } from 'url'
 
+global.sig = 'https://instagram.com/lordlightness'
+global.sgh = 'https://github.com/itsmedell'
+global.sgc = 'https://chat.whatsapp.com/CEVvA4sZGQX0ghG3EUb0ZM'
+
 global.owner = [
   ['6281224863098'],
   ['0'],
