@@ -585,7 +585,7 @@ export async function handler(chatUpdate) {
                         }
                     }
                     if (m.limit)
-                        m.reply(+m.limit + ' Limit terpakai ✔️')
+                       // m.reply(+m.limit + ' Limit terpakai ✔️')
                 }
                 break
             }
@@ -674,8 +674,8 @@ export async function participantsUpdate({ id, participants, action }) {
                             (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', await this.getName(user))
                         //this.sendFile(id, pp, 'pp.jpg', text, null, false, { mentions: [user] })
     this.sendHydrated(id, text, wm + '\n\n' + botdate, pp, sgc, (action == 'add' ? '💌 WELCOME' : '🐾 BYE'), user.split`@`[0], '🌹 USER', [
-      ['MENU 🎀', '/menu'],
-      ['\n\nSAYA PEDO DAN SAYA BANGGA (≧▽≦)', '...'],
+      ['MENU 🎀', '.menu'],
+      ['\n\nSAYA GAY DAN SAYA BANGGA', '...'],
       [null, null]
     ], null, false, { mentions: [user] })
                     }
@@ -741,22 +741,22 @@ Untuk mematikan fitur ini, ketik
 
 global.dfail = (type, m, conn) => {
     let msg = {
-        rowner: '[ ❗ ] Only Developer',
-        owner: '[ ❗ ] Only Owner',
-        mods: '[ ❗ ] Only Moderator',
-        premium: '[ ❗ ] Only Premium Users',
-        group: '[ ❗ ] Only Group Chat',
-        private: '[ ❗ ] Only Private Chat',
-        admin: '[ ❗ ] Only Admin Group',
-        botAdmin: '[ ❗ ] Only Bot Admin',
-        restrict: '[ ❗ ] This Fitur Disable'
+        rowner: '[ ❗ ] Hanya Developer',
+        owner: '[ ❗ ] Hanya Owner',
+        mods: '[ ❗ ] Hanya Moderator',
+        premium: '[ ❗ ] Hanya Pengguna Premium',
+        group: '[ ❗ ] Hanya Group Chat',
+        private: '[ ❗ ] Hanya Private Chat',
+        admin: '[ ❗ ] Hanya Admin Group',
+        botAdmin: '[ ❗ ] Hanya Bot Admin',
+        restrict: '[ ❗ ] Fitur ini dinonaktifkan'
     }[type]
-    if (msg) return conn.reply(m.chat, msg, m, { contextInfo: { externalAdReply: {title: global.wm, body: '404 Access denied ✘', sourceUrl: global.snh, thumbnail: fs.readFileSync('./thumbnail.jpg') }}})
+    if (msg) return conn.reply(m.chat, msg, m, { contextInfo: { externalAdReply: {title: global.wm, body: '404 Access denied!', sourceUrl: global.snh, thumbnail: fs.readFileSync('./thumbnail.jpg') }}})
     
     let msgg = {
     	unreg: 'Halo kak ! 👋\nAnda belum terdaftar didalam Database BOT 🗂️\n\nKlick Tombol dibawah Untuk Mendaftar Ke Database BOT !'
 }[type]
-if (msgg) return conn.sendHydrated(m.chat, msgg, global.wm, null, global.sgc, '🌎 Join My Group Official', `${m.sender.split`@`[0]}`, '🌹 U S E R', [
+if (msgg) return conn.sendHydrated(m.chat, msgg, global.wm, null, global.sgc, '🌎 Join My Group', `${m.sender.split`@`[0]}`, '🌹 U S E R', [
       ['▣ VERIFY ▣', '/daftar'],
       [null,null],
       [null, null]
