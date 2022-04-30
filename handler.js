@@ -751,7 +751,7 @@ global.dfail = (type, m, conn) => {
         botAdmin: '[ ❗ ] Hanya Bot Admin',
         restrict: '[ ❗ ] Fitur ini dinonaktifkan'
     }[type]
-    if (msg) return conn.reply(m.chat, msg, m, { contextInfo: { externalAdReply: {title: global.wm, body: '404 Access denied!', sourceUrl: global.snh, thumbnail: fs.readFileSync('./thumbnail.jpg') }}})
+    if (msg) return conn.reply(m.chat, msg, m, { contextInfo: { externalAdReply: {title: global.wm, body: '404 Access denied!', sourceUrl: global.sig, thumbnail: fs.readFileSync('./thumbnail.jpg') }}})
     
     let msgg = {
     	unreg: 'Halo kak ! 👋\nAnda belum terdaftar didalam Database BOT 🗂️\n\nKlick Tombol dibawah Untuk Mendaftar Ke Database BOT !'
