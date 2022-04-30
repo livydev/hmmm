@@ -673,7 +673,7 @@ export async function participantsUpdate({ id, participants, action }) {
                         text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'unknow') :
                             (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', await this.getName(user))
                         //this.sendFile(id, pp, 'pp.jpg', text, null, false, { mentions: [user] })
-    this.sendHydrated(id, text, wm + '\n\n' + botdate, pp, sgc, (action == 'add' ? '💌 WELCOME' : '🐾 BYE'), user.split`@`[0], '🌹 USER', [
+    this.sendHydrated(id, text, author, pp, sgc, (action == 'add' ? '💌 WELCOME' : '🐾 BYE'), user.split`@`[0], '🌹 USER', [
       ['MENU 🎀', '.menu'],
       ['\n\nSAYA GAY DAN SAYA BANGGA', '...'],
       [null, null]
@@ -756,7 +756,7 @@ global.dfail = (type, m, conn) => {
     let msgg = {
     	unreg: 'Halo kak ! 👋\nAnda belum terdaftar didalam Database BOT 🗂️\n\nKlick Tombol dibawah Untuk Mendaftar Ke Database BOT !'
 }[type]
-if (msgg) return conn.sendHydrated(m.chat, msgg, global.wm, null, global.sgc, '🌎 Join My Group', `${m.sender.split`@`[0]}`, '🌹 U S E R', [
+if (msgg) return conn.sendHydrated(m.chat, msgg, author, null, global.sgc, '🌎 Join My Group', `${m.sender.split`@`[0]}`, '🌹 U S E R', [
       ['▣ VERIFY ▣', '/daftar'],
       [null,null],
       [null, null]
