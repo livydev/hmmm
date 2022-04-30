@@ -9,7 +9,7 @@ let handler = async (m, { conn, args }) => {
   let waktu = clockString(`${premTime - new Date() * 1} `)
   let sortedP = user.map(toNumber('premiumTime')).sort(sort('premiumTime'))
   let len = args[0] && args[0].length > 0 ? Math.min(100, Math.max(parseInt(args[0]), 10)) : Math.min(10, sortedP.length)
-  await conn.sendButton(m.chat, `${htki} *PREMIUM* ${htka}
+  await conn.sendButton(m.chat, `*PREMIUM LIST*
 ┌✦ *My Premium Time:*
 ┊• *Name:* ${conn.getName(m.sender)}
 ${prem ? `${clockString (premiumTime - new Date() * 1)}` : '┊• *PremiumTime:* Expired 🚫'}
