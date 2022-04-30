@@ -5,33 +5,33 @@ let handler  = async (m, { conn, command, args, usedPrefix, DevMode }) => {
   let _type = (args[0] || '').toLowerCase()
   let user = global.db.data.users[m.sender]
   global.db.data.users[m.sender].pickaxe = global.db.data.users[m.sender].pickaxe || 0
-  global.db.data.users[m.sender].pedang = global.db.data.users[m.sender].pedang || 0
+  global.db.data.users[m.sender].sword = global.db.data.users[m.sender].sword || 0
   global.db.data.users[m.sender].fishingrod = global.db.data.users[m.sender].fishingrod || 0
-  let botol = global.botwm
+  let botol = global.author
 
 let lgocraft = `
 *「 R E P A I R」*`
 
   let caption = `
-▧ Pickaxe ⛏️
-▧ Sword ⚔️
-▧ Fishingrod 🎣
+• Pickaxe ⛏️
+• Sword ⚔️
+• Fishingrod 🎣
 
 *❏ RECIPE*
-▧ Pickaxe ⛏️
-〉 5 Kayu
-〉 3 Batu
-〉 3 Iron
-〉 1 Diamond
+• Pickaxe ⛏️
+> 5 Kayu
+> 3 Batu
+> 3 Iron
+> 1 Diamond
 
-▧ Sword ⚔️
-〉 5 Kayu
-〉 9 Iron
-〉 1 Diamond
+• Sword ⚔️
+> 5 Kayu
+> 9 Iron
+> 1 Diamond
 
-▧ Armor 🥼
-〉 15 Iron
-〉 3 Diamond
+• Armor 🥼
+> 15 Iron
+> 3 Diamond
 `
 const sections = [
    {
@@ -46,7 +46,7 @@ const sections = [
 
 const listMessage = {
   text: caption,
-  footer: wm,
+  footer: author,
   title: lgocraft,
   buttonText: "R E P A I R",
   sections
@@ -98,7 +98,7 @@ const listMessage = {
           break
 
         default:
-          return conn.sendButton( m.chat, caption, wm, null, [`⋮☰ Menu`, `.menu`], m)
+          return conn.sendButton( m.chat, caption, author, null, [`⋮☰ Menu`, `.menu`], m)
       }
     }
   } catch (err) {
