@@ -30,7 +30,7 @@ ${item.map(v => `${rpg.emoticon(v)}${v}`.trim()).join('\n')}
 
 ⏰ Timeout *60* detik
 `.trim()
-    let c = wm
+    let c = author
     conn.sendButton(m.chat, confirm, c, null, [['✔️'], ['✖️']], m, { mentions: [who] })
     confirmation[m.sender] = {
         sender: m.sender,
