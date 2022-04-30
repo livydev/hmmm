@@ -5,7 +5,7 @@ let handler  = async (m, { conn, command, args, usedPrefix, DevMode }) => {
   let _type = (args[0] || '').toLowerCase()
   let user = global.db.data.users[m.sender]
   global.db.data.users[m.sender].pickaxe = global.db.data.users[m.sender].pickaxe || 0
-  global.db.data.users[m.sender].pedang = global.db.data.users[m.sender].pedang || 0
+  global.db.data.users[m.sender].sword = global.db.data.users[m.sender].sword || 0
   global.db.data.users[m.sender].fishingrod = global.db.data.users[m.sender].fishingrod || 0
   
   //----------HARGA
@@ -99,7 +99,7 @@ const listMessage = {
           break
 
         default:
-          return conn.sendButton( m.chat, caption, wm, null, [`⋮☰ Menu`, `.menu`], m)
+          return conn.sendButton( m.chat, caption, author, null, [`⋮☰ Menu`, `.menu`], m)
       }
     }
   } catch (err) {
