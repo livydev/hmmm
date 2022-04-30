@@ -48,7 +48,7 @@ let handler = async function (m, { text, usedPrefix, command }) {
 
 const listMessage = {
   text: `Please select your age at the bottom button...\n*Your Name:* ${conn.getName(m.sender)}\nWant a costume name? type *${usedPrefix + command} yourname.age*`,
-  footer: global.wm,
+  footer: author,
   title: "━━━━「 Registration 」━━━━",
   buttonText: "Click Here !",
   sections
@@ -61,8 +61,8 @@ const listMessage = {
   if (!name) throw 'Nama tidak boleh kosong (Alphanumeric)'
   if (!age) throw 'Umur tidak boleh kosong (Angka)'
   age = parseInt(age)
-  if (age > 30) throw 'WOI TUA (。-`ω´-)'
-  if (age < 5) throw 'Halah dasar bocil'
+  if (age > 30) throw 'Umur terlalu tua bot tidak mendukung'
+  if (age < 5) throw '-_- emng bisa ya main whatsapp umur segitu?'
   user.name = name.trim()
   user.age = age
   user.regTime = + new Date
