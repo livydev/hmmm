@@ -66,7 +66,7 @@ const sections = [
 
 const listMessage = {
   text: caption,
-  footer: wm,
+  footer: author,
   title: lgocraft,
   buttonText: " C R A F T ",
   sections
