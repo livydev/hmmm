@@ -11,8 +11,8 @@
     },
     "scripts": {
         "start": "node index.js",
-        "test": "node test.js",
-        "test2": "nodemon index.js"
+        "cli": "node . --optimize_for_size --max_old_space_size=460 index.js",
+        "db": "node . --autocleartmp --db 'mongodb+srv://Della:lylia9090@cloudclus1.dlgwh.mongodb.net/cloudclus1?retryWrites=true&w=majority'"
     },
     "keywords": [
         "termux-whatsapp-bot",
