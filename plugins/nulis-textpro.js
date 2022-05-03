@@ -3,16 +3,16 @@ let split = '|'
 let handler = async (m, { conn, args: [effect], text: txt, usedPrefix, command, name }) => {
 if (!effect) throw '*[❗] Bagaimana cara menggunakan perintah ini?*\n_#logo (efek) (teks)_\n*Contoh:*\n_#logo 3d-deep-sea-metal Mystic_\n\n*[❗] Terkadang akan memberitahu Anda bahwa teks lain hilang, penggunaannya adalah sebagai berikut:*\n_#logo (efek) (text1|text2)_\n*Contoh:*\n_#logo Wolf-Logo-Galaxy The|Mystic_\n\ n* _<DAFTAR EFEK/>_*\n\n° #logo ' + effects.map(v => v.title).join('\n° #logo ')
 effect = effect.toLowerCase()
-if (!effects.find(v => (new RegExp(v.title, 'gi')).test(effect))) throw `*[❗] El efecto ${effect} no se encuentra en la base de datos*`
+if (!effects.find(v => (new RegExp(v.title, 'gi')).test(effect))) throw `[❗] Efek ${effect} tidak ditemukan di database*`
 let text = txt.replace(new RegExp(effect, 'gi'), '').trimStart()
 if (text.includes(split)) text = text.split(split)
 text = Array.isArray(text) ? text : [text]
 let res = await textpro(effect, ...text)
-if (typeof res == 'number') throw res == -1 ? `*[❗] El efecto *${effect}* no se encuentra en la base de datos*` : `*[❗] Uso correcto del comandos ${usedPrefix}${command} ${effect} ${new Array(res).fill('texto').map((v, i) => v + (i ? i + 1 : '')).join('|')}*`
+if (typeof res == 'number') throw res == -1 ? `*[❗] Efek *${effect}* tidak ditemukan dalam database*` : `*[❗] Penggunaan ${usedPrefix}${command} ${effect} ${new Array(res).fill('text').map((v, i) => v + (i ? i + 1 : '')).join('|')}*`
 let result = await axios.get(res, {
 responseType: 'arraybuffer'
 })
-await conn.sendFile(m.chat, result.data, 'Error.jpg', `*Toma tu imagen personalizada!!*\n*Efecto: ${effect}*`, m)
+await conn.sendFile(m.chat, result.data, 'Error.jpg', `*Kelar*\n*Efek: ${effect}*`, m)
 }
 handler.help = ['logos']
 handler.tags = ['nulis']
