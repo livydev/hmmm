@@ -1,18 +1,19 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import { watchFile, unwatchFile } from 'fs'
 import chalk from 'chalk'
 import { fileURLToPath } from 'url'
 
-global.sig = 'https://instagram.com/lordlightness'
-global.sgh = 'https://github.com/itsmedell'
-global.sgc = 'https://chat.whatsapp.com/CEVvA4sZGQX0ghG3EUb0ZM'
-
+global.sig = process.env.LINK_IG
+global.sgh = process.env.LINK_GITHUB
+global.sgc = process.env.LINK_GROUP
 global.owner = [
-  ['6281224863098'],
   ['0'],
-  ['6281224863098', 'Della', true]
+  ['0'],
+  [`${process.env.NOWNER}`, `${process.env.NAMAOWNER}`, true]
   // [number, dia creator/owner?, dia developer?]
 ] // Put your number here
-global.mods = [] // Want some help?
+global.mods = [`${process.env.MODERATOR}`] // Want some help?
 global.prems = [] // Premium user has unlimited limit
 global.APIs = { // API Prefix
   // name: 'https://website'
@@ -34,8 +35,8 @@ global.APIKeys = { // APIKey Here
 }
 
 // Sticker WM
-global.packname = 'Created By'
-global.author = 'Cloud Bot'
+global.packname = process.env.PACKNAME
+global.author = process.env.AUTHOR
 
 global.multiplier = 69 // The higher, The harder levelup
 
