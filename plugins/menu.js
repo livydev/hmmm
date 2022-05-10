@@ -2,53 +2,50 @@ import { promises } from 'fs'
 import { join } from 'path'
 import { xpRange } from '../lib/levelling.js'
 let tags = {
-  'main': '𝐌𝐚𝐢𝐧',
-  'game': '𝐆𝐚𝐦𝐞',
-  'rpg': '𝐑𝐏𝐆 𝐆𝐚𝐦𝐞𝐬',
-  'xp': '𝐄𝐗𝐏 & 𝐋𝐢𝐦𝐢𝐭',
-  'sticker': '𝐒𝐭𝐢𝐜𝐤𝐞𝐫',
-  'kerang': '𝐊𝐞𝐫𝐚𝐧𝐠 𝐀𝐣𝐚𝐢𝐛',
-  'quotes': '𝐐𝐮𝐨𝐭𝐞𝐬',
-  'admin': '𝐀𝐝𝐦𝐢𝐧',
-  'group': '𝐆𝐫𝐨𝐮𝐩',
-  'internet': '𝐈𝐧𝐭𝐞𝐫𝐧𝐞𝐭',
-  'anonymous': '𝐀𝐧𝐨𝐧𝐲𝐦𝐨𝐮𝐬 𝐂𝐡𝐚𝐭',
-  'nulis': '𝐌𝐚𝐠𝐞𝐫𝐍𝐮𝐥𝐢𝐬',
-  'downloader': '𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐫',
-  'tools': '𝐓𝐨𝐨𝐥𝐬',
-  'canvas': '𝐂𝐚𝐧𝐯𝐚𝐬',
-  'fun': '𝐅𝐮𝐧',
-  'database': '𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞',
-  'quran': '𝐀𝐥 𝐐𝐮𝐫\'𝐚𝐧',
-  'owner': '𝐎𝐰𝐧𝐞𝐫',
-  'maker': '𝐌𝐚𝐤𝐞𝐫',
-  'advanced': '𝐀𝐝𝐯𝐚𝐧𝐜𝐞𝐝',
-  'audio': '𝐀𝐮𝐝𝐢𝐨', 
-  'premium': '𝐏𝐫𝐞𝐦𝐢𝐮𝐦', 
-  'info': '𝐈𝐧𝐟𝐨'
+  'main': 'Main',
+  'game': 'Games',
+  'rpg': 'RPG',
+  'xp': 'EXP',
+  'sticker': 'Sticker',
+  'kerang': 'Kerang Ajaib',
+  'quotes': 'Quotes',
+  'admin': 'Admin',
+  'group': 'Group',
+  'internet': 'Internet',
+  'anonymous': 'Anonymous',
+  'nulis': 'MagerNulis',
+  'downloader': 'Downloader',
+  'tools': 'Tools',
+  'canvas': 'Canvas',
+  'fun': 'Fun',
+  'database': 'Database',
+  'quran': 'Al Quran',
+  'owner': 'Owner',
+  'maker': 'Maker',
+  'advanced': 'Advanced',
+  'audio': 'Audio', 
+  'premium': 'Premium', 
+  'info': 'info'
 }
 const defaultMenu = {
   before: `╭━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙
-│ 「 %me 」
-│ 𝐓𝐞𝐫𝐢𝐦𝐚𝐤𝐚𝐬𝐢𝐡 𝐒𝐮𝐝𝐚𝐡
-│ 𝐌𝐞𝐧𝐠𝐠𝐮𝐧𝐚𝐤𝐚𝐧 𝐁𝐨𝐭 𝐢𝐧𝐢
-│ 𝐒𝐞𝐦𝐨𝐠𝐚 𝐡𝐚𝐫𝐢𝐦𝐮 𝐦𝐞𝐧𝐲𝐞𝐧𝐚𝐧𝐠𝐤𝐚𝐧
+│ *Hello!* 「 %me 」
 ╰┬────────────┈ ⳹
-┌┤◦➛ 𝐍𝐚𝐦𝐚: %name!
-││◦➛ 𝐋𝐢𝐦𝐢𝐭: %limit Limit
-││◦➛ 𝐖𝐚𝐤𝐭𝐮: %time
-││◦➛ 𝐓𝐨𝐭𝐚𝐥 𝐗𝐩: %totalexp
-││◦➛ 𝐑𝐨𝐥𝐞: %role
+┌┤◦➛ Nama: %name!
+││◦➛ Limit: %limit Limit
+││◦➛ Waktu: %time
+││◦➛ Total Exp: %totalexp
+││◦➛ Role: %role
 │╰────────────┈ ⳹
-│ 𝐃𝐚𝐭𝐚𝐛𝐚𝐬𝐞: %rtotalreg of %totalreg
+│ Database: %rtotalreg of %totalreg
 ├────────────────
-│ 𝐔𝐩𝐭𝐢𝐦𝐞: %uptime (%muptime)
+│ Uptime: %uptime (%muptime)
 ╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙
 
 `.trimStart(),
   header: '╭━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙\n│ 「 %category 」\n╰┬────────────┈ ⳹\n┌┤ #JanganDispam',
   body: '││◦➛ %cmd %islimit %isPremium',
-  footer: '│╰────────────┈ ⳹\n│ 𝐓𝐚𝐧𝐠𝐠𝐚𝐥: %week, %date \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙',
+  footer: '│╰────────────┈ ⳹\n│ Tanggal: %week, %date \n╰━━━━━━━━━━━━┈ ❋ཻུ۪۪⸙',
   after: ``,
 }
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
@@ -148,11 +145,11 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     const pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => './src/avatar_contact.png')
-    const cloudbot = 'https://telegra.ph/file/baea4ead668adebdc5073.jpg'
-    conn.sendHydrated(m.chat, text.trim(), author, cloudbot, 'https://github.com/itsmedell', '𝐆𝐢𝐭𝐡𝐮𝐛', '+62 812 248 630 98', '𝐍𝐮𝐦𝐛𝐞𝐫 𝐎𝐰𝐧𝐞𝐫', [
-      ['𝐃𝐨𝐧𝐚𝐭𝐞', '/donasi'],
-      ['𝐒𝐩𝐞𝐞𝐝', '/ping'],
-      ['𝐂𝐫𝐞𝐚𝐭𝐨𝐫', '/owner']
+    const jaka = 'https://telegra.ph/file/c1b216383578f1c69b194.jpg'
+    conn.sendHydrated(m.chat, text.trim(), author, jaka, 'https://www.instagram.com/jaka_store1', 'Instagram Jaka Store', '+62 857 856 944 74', 'Number Jaka Store', [
+      ['Premium', '/premium'],
+      ['Ping', '/ping'],
+      ['Owner', '/owner']
     ], m)
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
